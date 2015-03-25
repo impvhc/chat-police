@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <body>
+    
+    latitude
+    <input type="text" id="lat"/>
+    <br/>
+    longitude
+    <input type="text" id="lng"/>
+    <br/>
+    estatus
+    <input type="text" id="estatus"/>
+    <br/>
+    numero
+    <input type="text" id="numero"/>
+    <br/>
+    <input type="button" id="perseguir" value="perseguir"/>
+    <ul id="messages"></ul>
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('#perseguir').click(function(){
+        persecucion();
+      });
+      socket.on('persecucion', function(data){
+        $('#messages').append($('<li>').text(data.posicion.lat));
+        $('#messages').append($('<li>').text(data.posicion.lng));
+        $('#messages').append($('<li>').text(data.estatus));
+        $('#messages').append($('<li>').text(data.numero));
+      });
+
+      var actualizar = function(){
+        var patrulla = {
+          posicion:{
+            lat:$('#lat').val(),
+            lng:$('#lng').val()
+          },
+          estatus:$('#estatus').val()
+        };
+        
+        socket.emit('actualizar',patrulla);
+      }
+
+      var persecucion = function(){
+        var patrulla = {
+          posicion:{
+            lat:$('#lat').val(),
+            lng:$('#lng').val()
+          },
+          estatus:$('#estatus').val(),
+          numero:$('#numero').val()
+        };
+        socket.emit('persecucion',patrulla);
+      }
+    </script>
+  </body>
+</html>
