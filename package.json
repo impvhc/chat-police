@@ -1,13 +1,22 @@
 {
-  "name": "socket-chat-example",
+  "name": "chat-police",
   "version": "0.0.1",
   "description": "my first socket.io app",
+  "main": "index.js",
+  "scripts": {
+     "start": "node index.js"
+   },
   "dependencies": {
-    "express": "4.10.2",
+    "express": "~3.4.x",
+	"express": "~4.9.x",
     "socket.io": "1.2.0"
   },
   "engines": {
      "node": "0.10.x",
 	 "npm":"1.2.x"
-	 }
+	 },
+ "repository": {
+     "type": "git",
+     "url": "https://github.com/impvhc/chat-police"
+   }
 }
